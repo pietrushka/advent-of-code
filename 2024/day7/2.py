@@ -11,7 +11,17 @@ def process(expected_result, values: list[int], operations: list[str]):
 
     left = values[0]
     right = values[1]
-    values[0] = left * right if operations[0] == "*" else left + right
+
+    outcome = 0
+    operation = operations[0]
+    if operation == "+":
+        outcome = left + right
+    elif operation == "*":
+        outcome = left * right
+    elif operation == "||":
+        outcome = int(f"{left}{right}")
+
+    values[0] = outcome
     values.pop(1)
     operations.pop(0)
 
@@ -19,7 +29,7 @@ def process(expected_result, values: list[int], operations: list[str]):
 
 
 def check(expected_result, values):
-    operation_variants = list(product(["+", "*"], repeat=len(values) - 1))
+    operation_variants = list(product(["+", "*", "||"], repeat=len(values) - 1))
 
     for operations in operation_variants:
         values_copy = list(values[:])
@@ -32,13 +42,17 @@ def check(expected_result, values):
 
 total = []
 
+lines_length = len(lines)
+idx = 0
 
 for line in lines:
+    print(f"""{idx}/{lines_length}""")
     outcome_str, values_str = line.split(": ")
     values = list(map(int, values_str.split(" ")))
     result = int(outcome_str)
     is_ok = check(result, values)
     if is_ok:
         total.append(result)
+    idx += 1
 
 print(sum(total))
