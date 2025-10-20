@@ -4,6 +4,7 @@ def safe_get_index(arr, value):
     except ValueError:
         return None
 
+
 def validate_update(update, rules):
     """
     Validate if an update satisfies the ordering rules.
@@ -15,12 +16,13 @@ def validate_update(update, rules):
             return False
     return True
 
+
 def get_middle(arr):
     """
     Get the middle value of an array.
     """
-    print(arr)
     return arr[len(arr) // 2]
+
 
 def produce_sequence(rules):
     """
@@ -53,11 +55,13 @@ def produce_sequence(rules):
 
     return sequence
 
+
 def correct_sequence(update, sequence):
     """
     Correct an update's order based on the produced valid sequence.
     """
     return [page for page in sequence if page in update]
+
 
 # Load data
 with open("day5/data.txt", "r") as f:
@@ -73,7 +77,7 @@ updates = [list(map(int, line.split(","))) for line in update_lines]
 
 # Generate valid sequence
 sequence = produce_sequence(rules)
-print('Valid Sequence:', sequence)
+print("Valid Sequence:", sequence)
 
 # Calculate the total from corrected updates
 total = 0
@@ -82,9 +86,9 @@ for update in updates:
         continue  # Skip valid updates
 
     corrected_update = correct_sequence(update, sequence)
-    print('Corrected Update:', corrected_update)
+    print("Corrected Update:", corrected_update)
     middle_value = get_middle(corrected_update)
-    print('Middle Value:', middle_value)
+    print("Middle Value:", middle_value)
     total += middle_value
 
-print('Total:', total)
+print("Total:", total)
