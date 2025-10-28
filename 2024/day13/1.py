@@ -20,15 +20,6 @@ for block in data:
     machines.append((button_a, button_b, prize))
 
 
-def validate_max(button_a, button_b, prize):
-    a_move = (button_a[0] * max_press, button_a[1] * max_press)
-    b_move = (button_b[0] * max_press, button_b[1] * max_press)
-    x = a_move[0] + b_move[0]
-    y = a_move[1] + b_move[1]
-
-    return x >= prize[0] and y >= prize[1]
-
-
 def simulate(a_press, b_press, button_a, button_b, prize):
     a_move = (button_a[0] * a_press, button_a[1] * a_press)
     b_move = (button_b[0] * b_press, button_b[1] * b_press)
